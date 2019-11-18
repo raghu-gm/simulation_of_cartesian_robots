@@ -1,0 +1,19 @@
+pppbot:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  
+  # Position Controllers ---------------------------------------
+  x_extension_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: x_extension
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  y_extension_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: y_extension
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  z_extension_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: z_extension
+    pid: {p: 100.0, i: 0.01, d: 10.0}

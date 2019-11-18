@@ -1,0 +1,18 @@
+<launch>
+
+    <!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find pppbot_control)/config/pppbot_control.yaml" command="load"/>
+
+    <!-- load the controllers -->
+    <node name="pppbot_controller_manager" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen"
+          ns="/pppbot"
+          args="joint_state_controller x_extension_position_controller y_extension_position_controller z_extension_position_controller"/>
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+          respawn="false" output="screen">
+        <remap from="/joint_states" to="/pppbot/joint_states" />
+    </node>
+
+</launch>

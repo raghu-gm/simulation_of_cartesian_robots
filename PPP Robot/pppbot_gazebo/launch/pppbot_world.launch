@@ -1,0 +1,28 @@
+<launch>
+
+    <!-- The arguments that can be passed to this launch file -->
+    <arg name="paused" default="false"/> <!-- Start Gazebo in a paused state -->
+    <arg name="use_sim_time" default="true"/> <!-- Tells ROS nodes asking for time to get the Gazebo-published simulation time, published over the ROS topic /clock -->
+    <arg name="gui" default="true"/> <!-- Launch the user interface window of Gazebo -->
+    <arg name="recording" default="false"/> <!-- Enable gazebo state log recording. Previously called headless -->
+    <arg name="debug" default="false"/> <!-- Start gzserver (Gazebo Server) in debug mode using gdb -->
+    <arg name="verbose" default="false"/> <!-- Print gzserver and gzclient errors and warnings to the terminal  -->
+
+    <!-- Resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find pppbot_gazebo)/worlds/pppbot.world"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="recording" value="$(arg recording)"/>
+        <arg name="debug" value="$(arg debug)" />
+    </include>
+
+    <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description" textfile="$(find pppbot_description)/urdf/pppbot.urdf" />
+
+    <!-- push robot_description to factory and send a service call to gazebo_ros to spawn a URDF robot in gazebo -->
+    <node name="pppbot_gazebo" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -param robot_description -model pppbot" />
+
+</launch>

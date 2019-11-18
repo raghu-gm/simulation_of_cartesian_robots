@@ -1,0 +1,213 @@
+<?xml version="1.0"?>
+<robot name="pppbot">
+    <link name="footprint" />
+
+    <joint name="base_joint" type="fixed">
+        <parent link="footprint"/>
+        <child link="base_link"/>
+    </joint>
+
+    <link name="base_link">
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.4"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.2"/>
+            <material name="yellow">
+                <color rgba="1 1 0 1"/>
+            </material>
+        </collision>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.4"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0.2"/>
+            <material name="yellow">
+                <color rgba="1 1 0 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="100"/>
+            <inertia ixx="1.3542" ixy="0.0" ixz="0.0"
+                     iyy="1.3542" iyz="0.0"
+                     izz="0.0417"/>
+        </inertial>
+    </link>
+
+    <joint name="x_extension" type="prismatic">
+        <parent link="base_link"/>
+        <child link="link_X"/>
+        <limit effort="1000.0" lower="0.001" upper="0.5" velocity="0.5"/>
+        <origin rpy="0 0 0" xyz="0.025 0 0.35"/>
+        <axis xyz = "1 0 0" />
+        <dynamics damping="5" friction="1"/>
+    </joint>
+
+    <link name="link_X">
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <!-- <origin rpy="0 0 0" xyz="0.21 0 0"/> -->
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </collision>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="red">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="0.0004167" ixy="0.0" ixz="0.0"
+                     iyy="0.0004167" iyz="0.0"
+                     izz="0.0004167"/>
+        </inertial>
+    </link>
+
+    <joint name="y_extension" type="prismatic">
+        <parent link="link_X"/>
+        <child link="link_Y"/>
+        <limit effort="1000.0" lower="0.001" upper="0.5" velocity="0.5"/>
+        <!-- <origin rpy="0 0 1.57075" xyz="0.05 0.05 0"/> -->
+        <origin rpy="0 0 0" xyz="0 0.05 0"/>
+        <axis xyz = "0 1 0" />
+        <dynamics damping="5" friction="1"/>
+    </joint>
+
+    <link name="link_Y">
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="green">
+                <color rgba="0 1 0 1"/>
+            </material>
+        </collision>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="green">
+                <color rgba="0 1 0 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="1"/>
+            <inertia ixx="0.0004167" ixy="0.0" ixz="0.0"
+                     iyy="0.0004167" iyz="0.0"
+                     izz="0.0004167"/>
+        </inertial>
+    </link>
+
+    <joint name="z_extension" type="prismatic">
+        <parent link="link_Y"/>
+        <child link="link_Z"/>
+        <limit effort="1000.0" lower="0.001" upper="0.25" velocity="0.5"/>
+        <!-- <origin rpy="0 1.57075 0" xyz="0 0 0"/> -->
+        <origin rpy="0 0 0" xyz="0.05 0 0"/>
+        <axis xyz = "0 0 -1" />
+        <dynamics damping="5" friction="10"/>
+    </joint>
+
+    <link name="link_Z">
+        <collision>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </collision>
+        <visual>
+            <geometry>
+                <box size="0.05 0.05 0.05"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0.025 0.025 0.025"/>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+        <inertial>
+            <mass value="0.1"/>
+            <inertia ixx="0.00004167" ixy="0.0" ixz="0.0"
+                     iyy="0.00004167" iyz="0.0"
+                     izz="0.00004167"/>
+        </inertial>
+    </link>
+
+    <transmission name="X_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="x_extension">
+            <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+                 Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="X_Motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>10</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="Y_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="y_extension">
+            <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+                 Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="Y_Motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>10</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <transmission name="Z_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="z_extension">
+            <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+                 Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="Z_Motor">
+            <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>10</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <!-- ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/pppbot</robotNamespace>
+            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+            <!-- Added <legacyModeNS> tag as work around to bug regarding the robotNamespace in default_robot_hw_sim.cpp (see #637)
+                 Refer: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/ -->
+            <legacyModeNS>true</legacyModeNS>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+
+    <gazebo reference="link_X">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo reference="link_Y">
+        <material>Gazebo/Green</material>
+    </gazebo>
+
+    <gazebo reference="link_Z">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+</robot>

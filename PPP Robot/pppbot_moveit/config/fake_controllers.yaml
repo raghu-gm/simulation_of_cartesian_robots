@@ -1,0 +1,6 @@
+controller_list:
+  - name: fake_ppp_arm_controller
+    joints:
+      - x_extension
+      - y_extension
+      - z_extension
