@@ -1,0 +1,258 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="gantrybot">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="gantrybot_arm">
+        <chain base_link="x_link" tip_link="turret_house3" />
+    </group>
+    <group name="gripper1">
+        <joint name="gripper_1_roll_joint" />
+        <joint name="grip1_finger1_joint" />
+        <joint name="grip1_finger2_joint" />
+    </group>
+    <group name="gripper2">
+        <joint name="gripper_2_roll_joint" />
+        <joint name="grip2_finger1_joint" />
+        <joint name="grip2_finger2_joint" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home_pose" group="gantrybot_arm">
+        <joint name="turret_joint" value="0.1562" />
+        <joint name="x_joint" value="0" />
+        <joint name="y_joint" value="0" />
+        <joint name="z_joint" value="0.25" />
+    </group_state>
+    <group_state name="pick_inter_pose" group="gantrybot_arm">
+        <joint name="turret_joint" value="0.1562" />
+        <joint name="x_joint" value="-0.9" />
+        <joint name="y_joint" value="1" />
+        <joint name="z_joint" value="0.25" />
+    </group_state>
+    <group_state name="pick_pose" group="gantrybot_arm">
+        <joint name="turret_joint" value="3.2978" />
+        <joint name="x_joint" value="-0.9" />
+        <joint name="y_joint" value="1" />
+        <joint name="z_joint" value="-0.29" />
+    </group_state>
+    <group_state name="place_inter_pose" group="gantrybot_arm">
+        <joint name="turret_joint" value="3.2978" />
+        <joint name="x_joint" value="0.9" />
+        <joint name="y_joint" value="-1" />
+        <joint name="z_joint" value="0.25" />
+    </group_state>
+    <group_state name="place_pose" group="gantrybot_arm">
+        <joint name="turret_joint" value="3.2978" />
+        <joint name="x_joint" value="0.9" />
+        <joint name="y_joint" value="-1" />
+        <joint name="z_joint" value="-0.29" />
+    </group_state>
+    <group_state name="gripper1_open" group="gripper1">
+        <joint name="grip1_finger1_joint" value="0.35" />
+        <joint name="grip1_finger2_joint" value="0.35" />
+        <joint name="gripper_1_roll_joint" value="1.4527" />
+    </group_state>
+    <group_state name="gripper1_close" group="gripper1">
+        <joint name="grip1_finger1_joint" value="0" />
+        <joint name="grip1_finger2_joint" value="0" />
+        <joint name="gripper_1_roll_joint" value="1.4527" />
+    </group_state>
+    <group_state name="gripper2_close" group="gripper2">
+        <joint name="grip2_finger1_joint" value="0" />
+        <joint name="grip2_finger2_joint" value="0" />
+        <joint name="gripper_2_roll_joint" value="1.4527" />
+    </group_state>
+    <group_state name="gripper2_open" group="gripper2">
+        <joint name="grip2_finger1_joint" value="0.35" />
+        <joint name="grip2_finger2_joint" value="0.35" />
+        <joint name="gripper_2_roll_joint" value="1.4527" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="gantrybot_eef1" parent_link="turret_house2" group="gripper1" parent_group="gantrybot_arm" />
+    <end_effector name="gantrybot_eef2" parent_link="turret_house2" group="gripper2" parent_group="gantrybot_arm" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="gripper1_finger1" link2="gripper1_finger2" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper2_finger1" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper2_finger2" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_1_motor" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_1_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_1_top" reason="Adjacent" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper1_finger1" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper2_finger1" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper2_finger2" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_1_motor" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_1_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_1_top" reason="Adjacent" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper1_finger2" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper2_finger2" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_1_motor" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_1_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_1_top" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="gripper_2_top" reason="Adjacent" />
+    <disable_collisions link1="gripper2_finger1" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger1" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_1_motor" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_1_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_1_top" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="gripper_2_top" reason="Adjacent" />
+    <disable_collisions link1="gripper2_finger2" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper2_finger2" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="gripper_1_shaft" reason="Adjacent" />
+    <disable_collisions link1="gripper_1_motor" link2="gripper_1_top" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="turret_house2" reason="Adjacent" />
+    <disable_collisions link1="gripper_1_motor" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_1_motor" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="gripper_1_top" reason="Adjacent" />
+    <disable_collisions link1="gripper_1_shaft" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_1_shaft" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="gripper_2_motor" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="gripper_2_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_1_top" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="gripper_2_shaft" reason="Adjacent" />
+    <disable_collisions link1="gripper_2_motor" link2="gripper_2_top" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="turret_house2" reason="Adjacent" />
+    <disable_collisions link1="gripper_2_motor" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_2_motor" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="gripper_2_top" reason="Adjacent" />
+    <disable_collisions link1="gripper_2_shaft" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_2_shaft" link2="z_link" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="table_top" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="x_link" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="y_link" reason="Never" />
+    <disable_collisions link1="gripper_2_top" link2="z_link" reason="Never" />
+    <disable_collisions link1="table_legs" link2="table_top" reason="Adjacent" />
+    <disable_collisions link1="table_legs" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="table_legs" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="table_legs" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="table_legs" link2="x_link" reason="Never" />
+    <disable_collisions link1="table_legs" link2="y_link" reason="Never" />
+    <disable_collisions link1="table_legs" link2="z_link" reason="Never" />
+    <disable_collisions link1="table_top" link2="turret_holder" reason="Never" />
+    <disable_collisions link1="table_top" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="table_top" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="table_top" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="table_top" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="table_top" link2="x_link" reason="Adjacent" />
+    <disable_collisions link1="table_top" link2="y_link" reason="Never" />
+    <disable_collisions link1="table_top" link2="z_link" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="turret_house1" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="turret_house2" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="turret_shaft" reason="Adjacent" />
+    <disable_collisions link1="turret_holder" link2="x_link" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="y_link" reason="Never" />
+    <disable_collisions link1="turret_holder" link2="z_link" reason="Adjacent" />
+    <disable_collisions link1="turret_house1" link2="turret_house2" reason="Adjacent" />
+    <disable_collisions link1="turret_house1" link2="turret_house3" reason="Never" />
+    <disable_collisions link1="turret_house1" link2="turret_shaft" reason="Adjacent" />
+    <disable_collisions link1="turret_house1" link2="x_link" reason="Never" />
+    <disable_collisions link1="turret_house1" link2="y_link" reason="Never" />
+    <disable_collisions link1="turret_house1" link2="z_link" reason="Never" />
+    <disable_collisions link1="turret_house2" link2="turret_house3" reason="Adjacent" />
+    <disable_collisions link1="turret_house2" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="turret_house2" link2="x_link" reason="Never" />
+    <disable_collisions link1="turret_house2" link2="y_link" reason="Never" />
+    <disable_collisions link1="turret_house2" link2="z_link" reason="Never" />
+    <disable_collisions link1="turret_house3" link2="turret_shaft" reason="Never" />
+    <disable_collisions link1="turret_house3" link2="x_link" reason="Never" />
+    <disable_collisions link1="turret_house3" link2="y_link" reason="Never" />
+    <disable_collisions link1="turret_house3" link2="z_link" reason="Never" />
+    <disable_collisions link1="turret_shaft" link2="x_link" reason="Never" />
+    <disable_collisions link1="turret_shaft" link2="y_link" reason="Never" />
+    <disable_collisions link1="turret_shaft" link2="z_link" reason="Never" />
+    <disable_collisions link1="x_link" link2="y_link" reason="Adjacent" />
+    <disable_collisions link1="x_link" link2="z_link" reason="Never" />
+    <disable_collisions link1="y_link" link2="z_link" reason="Adjacent" />
+</robot>

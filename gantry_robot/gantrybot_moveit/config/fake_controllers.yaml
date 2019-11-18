@@ -1,0 +1,17 @@
+controller_list:
+  - name: fake_gantrybot_arm_controller
+    joints:
+      - x_joint
+      - y_joint
+      - z_joint
+      - turret_joint
+  - name: fake_gripper1_controller
+    joints:
+      - gripper_1_roll_joint
+      - grip1_finger1_joint
+      - grip1_finger2_joint
+  - name: fake_gripper2_controller
+    joints:
+      - gripper_2_roll_joint
+      - grip2_finger1_joint
+      - grip2_finger2_joint

@@ -1,0 +1,1448 @@
+<?xml version="1.0"?>
+<robot
+  name="gantrybot">
+  <link name="floor_link" />
+
+  <joint name="floor_joint" type="fixed">
+    <parent link="floor_link"/>
+    <child link="x_link"/>
+  </joint>
+
+  <link
+    name="x_link">
+    <inertial>
+      <origin
+        xyz="1.07395039666407 -1.80893388435545 1.63199914732132"
+        rpy="0 0 0" />
+      <mass
+        value="8.18083524943849" />
+      <inertia
+        ixx="11.8319731728866"
+        ixy="1.2603454076832E-13"
+        ixz="2.82950186081272E-08"
+        iyy="0.000117490202905156"
+        iyz="1.32836200778391E-11"
+        izz="11.8318556826973" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/x_link.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+-->
+      <material name="yellow">
+        <color rgba="0.80 0.80 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/x_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="table_top">
+    <inertial>
+      <origin
+        xyz="-6.66133814775094E-16 0.0499828613284043 0"
+        rpy="0 0 0" />
+      <mass
+        value="767.911605237122" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/table_top.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+-->
+      <material name="lightgray">
+        <color rgba="0.95 0.95 0.95 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/table_top.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="base_joint"
+    type="fixed">
+    <origin
+      xyz="1.073951980437 -1.80893388360599 1.64557591968713"
+      rpy="1.5707963267949 0 0" />
+    <parent
+      link="x_link" />
+    <child
+      link="table_top" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="table_legs">
+    <inertial>
+      <origin
+        xyz="-1.225 0.720829799446293 -1.225"
+        rpy="0 0 0" />
+      <mass
+        value="489.382099322089" />
+      <inertia
+        ixx="734.37901279521"
+        ixy="-1.26217744835362E-29"
+        ixz="-1.4210854715202E-13"
+        iyy="1468.75802559042"
+        iyz="6.31088724176809E-30"
+        izz="734.37901279521" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/table_legs.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+-->
+      <material name="lightgray">
+        <color rgba="0.95 0.95 0.95 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/table_legs.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="table_joints"
+    type="fixed">
+    <origin
+      xyz="1.225 -1.5 1.225"
+      rpy="0 0 0" />
+    <parent
+      link="table_top" />
+    <child
+      link="table_legs" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="y_link">
+    <inertial>
+      <origin
+        xyz="-1.20259645018806 -0.0703068732520886 -0.0747160964223756"
+        rpy="0 0 0" />
+      <mass
+        value="7.19114457071059" />
+      <inertia
+        ixx="0.00599123194356699"
+        ixy="-1.30107246835293E-06"
+        ixz="-6.896124802383E-07"
+        iyy="3.05087919369185"
+        iyz="-0.0016092783627855"
+        izz="3.05146644876451" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/y_link.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+-->
+      <material name="lightred">
+        <color rgba="0.40 0.00 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/y_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="x_joint"
+    type="prismatic">
+    <origin
+      xyz="1.0192 -3.0115 1.6453"
+      rpy="1.5708 -6.123E-17 -1.5708" />
+    <parent
+      link="x_link" />
+    <child
+      link="y_link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.95"
+      upper="0.95"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      damping="7.4"
+      friction="0.17" />
+  </joint>
+  <link
+    name="z_link">
+    <inertial>
+      <origin
+        xyz="0.122778044807998 0.0533913349681556 -0.054800004862896"
+        rpy="0 0 0" />
+      <mass
+        value="2.46179968721014" />
+      <inertia
+        ixx="0.00151834009864718"
+        ixy="-0.00206455294459246"
+        ixz="1.25683554286852E-09"
+        iyy="0.0416221701850608"
+        iyz="7.17858863550886E-11"
+        izz="0.0413332416109357" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/z_link.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="0.650980392156863 0.619607843137255 0.588235294117647 1" />
+      </material>
+-->
+      <material name="green">
+        <color rgba="0.00 0.80 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/z_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="y_joint"
+    type="prismatic">
+    <origin
+      xyz="-1.1478 -0.0815 -0.065989"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="y_link" />
+    <child
+      link="z_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-1.10"
+      upper="1.10"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      damping="7.4"
+      friction="0.17" />
+  </joint>
+  <link
+    name="turret_holder">
+    <inertial>
+      <origin
+        xyz="3.96333412266969E-06 0.0778108067251946 0.0572968600316968"
+        rpy="0 0 0" />
+      <mass
+        value="4.24406754870637" />
+      <inertia
+        ixx="0.0048594571627213"
+        ixy="7.32979546251446E-07"
+        ixz="5.88272980478283E-08"
+        iyy="0.00109820294598619"
+        iyz="0.000487022592695588"
+        izz="0.00376125539273943" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_holder.STL" />
+      </geometry>
+<!--
+      <material
+
+        name="">
+        <color
+          rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+      </material>
+-->
+      <material name="lightblue">
+        <color rgba="0.00 0.00 0.25 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_holder.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="z_joint"
+    type="prismatic">
+    <origin
+      xyz="0.18215 0.04825 -0.0548"
+      rpy="0 1.5708 0" />
+    <parent
+      link="z_link" />
+    <child
+      link="turret_holder" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.29"
+      upper="0.25"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      damping="7.4"
+      friction="0.17" />
+  </joint>
+  <link
+    name="turret_shaft">
+    <inertial>
+      <origin
+        xyz="4.49187353979141E-11 5.53437295991444E-11 0.0509916693658987"
+        rpy="0 0 0" />
+      <mass
+        value="0.0400345859887326" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_shaft.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_shaft.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="turret_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.13794 0.060858"
+      rpy="0.59522 0.54723 2.4864" />
+    <parent
+      link="turret_holder" />
+    <child
+      link="turret_shaft" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0.15618"
+      upper="6.43937"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+  <link
+    name="turret_house1">
+    <inertial>
+      <origin
+        xyz="-4.2668091282394E-12 5.57331958361829E-13 0.0595195433947271"
+        rpy="0 0 0" />
+      <mass
+        value="0.344691292949324" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="turret_shaft_fixed"
+    type="fixed">
+    <origin
+      xyz="0 0 0.041756"
+      rpy="1.1569E-15 6.5692E-16 -3.1408" />
+    <parent
+      link="turret_shaft" />
+    <child
+      link="turret_house1" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="turret_house2">
+    <inertial>
+      <origin
+        xyz="-8.88178419700125E-16 4.44089209850063E-16 0.0332432432432432"
+        rpy="0 0 0" />
+      <mass
+        value="0.576772918920436" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="h1_h2_fixed"
+    type="fixed">
+    <origin
+      xyz="0 0 0.07"
+      rpy="5.8392E-16 2.4767E-16 -2.0944" />
+    <parent
+      link="turret_house1" />
+    <child
+      link="turret_house2" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="turret_house3">
+    <inertial>
+      <origin
+        xyz="0 0 0.028542613906984"
+        rpy="0 0 0" />
+      <mass
+        value="0.607545466364144" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/turret_house3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="h2_h3"
+    type="fixed">
+    <origin
+      xyz="0 0 0.06"
+      rpy="2.7062E-16 -5.4033E-16 -2.0944" />
+    <parent
+      link="turret_house2" />
+    <child
+      link="turret_house3" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="gripper_1_motor">
+    <inertial>
+      <origin
+        xyz="-2.95598434618682E-10 -3.24683330734654E-05 0.0229744903128875"
+        rpy="0 0 0" />
+      <mass
+        value="1.03306527609508" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_motor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_motor.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="turret_motor_for_gripper_1"
+    type="fixed">
+    <origin
+      xyz="0 0.035059 0.019941"
+      rpy="1.1755E-16 -0.7854 -1.5708" />
+    <parent
+      link="turret_house2" />
+    <child
+      link="gripper_1_motor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="gripper_1_shaft">
+    <inertial>
+      <origin
+        xyz="-1.3251943986603E-10 2.49104736838035E-10 0.0299113247893201"
+        rpy="0 0 0" />
+      <mass
+        value="0.0234409428156239" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_shaft.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_shaft.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="gripper_1_roll_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.045212"
+      rpy="1.1102E-16 1.3878E-16 2.4329" />
+    <parent
+      link="gripper_1_motor" />
+    <child
+      link="gripper_1_shaft" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.2831"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+  <link
+    name="gripper_1_top">
+    <inertial>
+      <origin
+        xyz="1.63498263793249E-05 7.48816677109687E-06 0.0385430866367615"
+        rpy="0 0 0" />
+      <mass
+        value="0.26775029336968" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_top.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="red">
+        <color rgba="0.80 0.00 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_1_top.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="g_1_shaft_fixed"
+    type="fixed">
+    <origin
+      xyz="-1.8074E-05 0 0.058444"
+      rpy="8.3267E-17 5.5511E-17 -0.42965" />
+    <parent
+      link="gripper_1_shaft" />
+    <child
+      link="gripper_1_top" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+<!--
+  <link
+    name="left_grip_gripper1">
+-->
+  <link
+    name="gripper1_finger1">
+    <inertial>
+      <origin
+        xyz="-0.0147119135939706 0.0768324471694968 0.0149999999999997"
+        rpy="0 0 0" />
+      <mass
+        value="0.134162326535576" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/left_grip_gripper1.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="red">
+        <color rgba="0.80 0.00 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/left_grip_gripper1.STL" />
+      </geometry>
+    </collision>
+  </link>
+<!--
+    <joint
+    name="left_hold_g1"
+    type="revolute">
+-->
+  <joint
+    name="grip1_finger1_joint"
+    type="revolute">
+    <origin
+      xyz="-0.014984 0.015464 0.044985"
+      rpy="1.5708 0.42592 1.5708" />
+    <parent
+      link="gripper_1_top" />
+<!--    <child
+      link="left_grip_gripper1" />
+-->
+    <child
+      link="gripper1_finger1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.35"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+<!--
+  <link
+    name="right_grip_gripper1">
+-->
+  <link
+    name="gripper1_finger2">
+    <inertial>
+      <origin
+        xyz="-0.0147119135939708 0.0768324471694974 0.0149999999999999"
+        rpy="0 0 0" />
+      <mass
+        value="0.134162326535576" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/right_grip_gripper1.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="red">
+        <color rgba="0.80 0.00 0.00 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/right_grip_gripper1.STL" />
+      </geometry>
+    </collision>
+  </link>
+<!--
+  <joint
+    name="right_hold_g1" 
+    type="revolute">
+-->
+  <joint
+    name="grip1_finger2_joint"
+    type="revolute">
+    <origin
+      xyz="0.015016 -0.015449 0.044985"
+      rpy="1.5708 0.44489 -1.5708" />
+    <parent
+      link="gripper_1_top" />
+    <child
+      link="gripper1_finger2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.35"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+  <link
+    name="gripper_2_motor">
+    <inertial>
+      <origin
+        xyz="-2.95603097555386E-10 -3.24683330741316E-05 0.0229744903128892"
+        rpy="0 0 0" />
+      <mass
+        value="1.03306527609533" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_motor.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_motor.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="turret_motor_for_gripper_2"
+    type="fixed">
+    <origin
+      xyz="0 -0.035059 0.019941"
+      rpy="5.9087E-17 -0.7854 1.5708" />
+    <parent
+      link="turret_house2" />
+    <child
+      link="gripper_2_motor" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="gripper_2_shaft">
+    <inertial>
+      <origin
+        xyz="-1.32519328843728E-10 2.49105180927245E-10 0.0299113247893208"
+        rpy="0 0 0" />
+      <mass
+        value="0.0234409428156264" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_shaft.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.776470588235294 0.756862745098039 0.737254901960784 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_shaft.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="gripper_2_roll_joint"
+    type="revolute">
+    <origin
+      xyz="0 0 0.045212"
+      rpy="-1.5266E-16 7.494E-16 -0.92947" />
+    <parent
+      link="gripper_2_motor" />
+    <child
+      link="gripper_2_shaft" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="0"
+      upper="6.2831"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+  <link
+    name="gripper_2_top">
+    <inertial>
+      <origin
+        xyz="1.63498263787698E-05 7.48816677043074E-06 0.0385430866367613"
+        rpy="0 0 0" />
+      <mass
+        value="0.267750293369682" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_top.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="blue">
+        <color rgba="0.00 0.00 0.80 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/gripper_2_top.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="g_2_shaft_fixed"
+    type="fixed">
+    <origin
+      xyz="1.80744228721608E-05 0 0.0584439356480511"
+      rpy="-2.70616862252382E-16 3.05311331771918E-16 2.71194290330157" />
+    <parent
+      link="gripper_2_shaft" />
+    <child
+      link="gripper_2_top" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+<!--
+  <link
+    name="left_grip_gripper2">
+-->
+  <link
+    name="gripper2_finger1">
+    <inertial>
+      <origin
+        xyz="-0.0147119135939707 0.0768324471694974 0.0149999999999999"
+        rpy="0 0 0" />
+      <mass
+        value="0.134162326535577" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/left_grip_gripper2.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="blue">
+        <color rgba="0.00 0.00 0.80 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/left_grip_gripper2.STL" />
+      </geometry>
+    </collision>
+  </link>
+<!--
+    <joint
+    name="left_hold_g2"
+    type="revolute">
+-->
+  <joint
+    name="grip2_finger1_joint"
+    type="revolute">
+    <origin
+      xyz="-0.014984 0.015464 0.044985"
+      rpy="1.5708 0.40745 1.5708" />
+    <parent
+      link="gripper_2_top" />
+<!--
+    <child
+      link="left_grip_gripper2" />
+-->
+    <child
+      link="gripper2_finger1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.35"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+<!--
+  <link
+    name="hold_grip_gripper2">
+-->
+  <link
+    name="gripper2_finger2">
+    <inertial>
+      <origin
+        xyz="-0.0147119135939708 0.0768324471694972 0.0150000000000001"
+        rpy="0 0 0" />
+      <mass
+        value="0.134162326535576" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/hold_grip_gripper2.STL" />
+      </geometry>
+<!--
+      <material
+        name="">
+        <color
+          rgba="1 1 1 0.3" />
+      </material>
+-->
+      <material name="blue">
+        <color rgba="0.00 0.00 0.80 1.00"/>
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gantrybot_description/meshes/hold_grip_gripper2.STL" />
+      </geometry>
+    </collision>
+  </link>
+<!--
+  <joint
+    name="right_hold_g2" 
+    type="revolute">
+-->
+  <joint
+    name="grip2_finger2_joint"
+    type="revolute">
+    <origin
+      xyz="0.015016 -0.015449 0.044985"
+      rpy="1.5708 0.47992 -1.5708" />
+    <parent
+      link="gripper_2_top" />
+<!--
+    <child
+      link="hold_grip_gripper2" />
+-->
+    <child
+      link="gripper2_finger2" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.35"
+      effort="0"
+      velocity="0" />
+    <dynamics
+      friction="0.12" />
+  </joint>
+
+  <gazebo reference="table_top">
+    <!-- <material>Gazebo/Yellow</material> -->
+    <material>Gazebo/Bricks</material>
+  </gazebo>
+
+  <gazebo reference="table_legs">
+    <!-- <material>Gazebo/Yellow</material> -->
+    <material>Gazebo/Bricks</material>
+  </gazebo>
+
+  <gazebo reference="x_link">
+    <material>Gazebo/Gold</material>
+  </gazebo>
+
+  <gazebo reference="y_link">
+    <!--<material>Gazebo/Lane_1</material>-->
+    <material>Gazebo/Gold</material>
+  </gazebo>
+
+  <gazebo reference="z_link">
+    <material>Gazebo/Gold</material>
+  </gazebo>
+
+  <gazebo reference="turret_holder">
+    <material>Gazebo/Grass</material>
+  </gazebo>
+
+  <gazebo reference="turret_shaft">
+    <material>Gazebo/Grass</material>
+  </gazebo>
+
+  <gazebo reference="turret_house1">
+    <material>Gazebo/Grass</material>
+  </gazebo>
+
+  <gazebo reference="turret_house2">
+    <material>Gazebo/Grass</material>
+  </gazebo>
+
+  <gazebo reference="turret_house3">
+    <material>Gazebo/Grass</material>
+  </gazebo>
+
+  <gazebo reference="gripper_1_top">
+    <material>Gazebo/LightBlueLaser</material>
+  </gazebo>
+
+  <gazebo reference="gripper1_finger1">
+    <material>Gazebo/LightBlueLaser</material>
+  </gazebo>
+
+  <gazebo reference="gripper1_finger2">
+    <material>Gazebo/LightBlueLaser</material>
+  </gazebo>
+
+  <gazebo reference="gripper_2_top">
+    <material>Gazebo/DarkYellow</material>
+  </gazebo>
+
+  <gazebo reference="gripper2_finger1">
+    <material>Gazebo/DarkYellow</material>
+  </gazebo>
+
+  <gazebo reference="gripper2_finger2">
+    <material>Gazebo/DarkYellow</material>
+  </gazebo>
+
+  <transmission name="X_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="x_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="X_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Y_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="y_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Y_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Z_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="z_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Z_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Turret_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="turret_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Turret_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Gripper1_Roll_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_1_roll_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip1_Roll_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Grip1_Finger1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grip1_finger1_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip1_Finger1_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Grip1_Finger2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grip1_finger2_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip1_Finger1_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Gripper2_Roll_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_2_roll_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip1_Roll_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Grip2_Finger1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grip2_finger1_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip2_Finger1_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="Grip2_Finger2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grip2_finger2_joint">
+      <!-- Added <hardwareInterface> tag as work around to error - "No valid hardware interface element found in joint"
+           Refer: https://answers.ros.org/question/186681/no-valid-hardware-interface-element-found-in-joint/ -->
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="Grip2_Finger1_Motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/gantrybot</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <!-- Added <legacyModeNS> tag as work around to bug regarding the robotNamespace in default_robot_hw_sim.cpp (see #637)
+           Refer: https://answers.ros.org/question/292444/gazebo_ros_control-plugin-gazeboroscontrolplugin-missing-legacymodens-defaultrobothwsim/ -->
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>
+</robot>
